@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery.js"></script>
+    <title>nodejs接收get请求参数</title>
+</head>
+
+<body>
+    <form id="form">
+        <div>
+            <input type="text" name="name">
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="gender" value="男" checked>男
+            </label>
+            <label>
+                <input type="radio" name="gender" value="女" checked>女
+            </label>
+        </div>
+        <button type="submit">表单提交</button>
+    </form>
+    <a href="/getRequest?name=mz&age=10">点击发送一个get请求参数</a>
+    <button onclick="window.location.href='/getRequest?name=zm&age=18'">点击按钮发送请求</button>
+</body>
+<script>
+    $('#form').on('submit', function (e) {
+
+        //禁用表单默认提交事件
+        e.preventDefault();
+        $.ajax({
+            url: '/getRequest',
+            type: 'get',
+            data: $(this).serialize(),
+            success: function (data) {
+                window.alert(data);
+            }
+        });
+    });
+</script>
+
+</html>
